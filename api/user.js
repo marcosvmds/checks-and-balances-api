@@ -7,5 +7,12 @@ module.exports = app => {
             .then(_ => res.status(204).send("usuário cadastrado"))
             .catch(err => res.status(500).send(err))
     }
-    return {save}
+    const get = (req, res) =>{
+        app.db('users')
+            .then(users => res.json(users))
+            .catch(err => res.status(500).send(err))
+    }  
+
+    return {save, get}
 }
+
