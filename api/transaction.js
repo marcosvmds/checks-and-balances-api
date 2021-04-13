@@ -5,7 +5,9 @@ module.exports = app => {
         app.db('transactions')
             .insert(transaction)
             .then(_ => res.status(204).send("transação cadastrada"))
-            .catch(err => res.status(500).send(err))
+            .catch(err => {
+                res.status(500).send(err)
+            })
     }
     const get = (req, res) => {
         app.db('transactions')
@@ -20,5 +22,10 @@ module.exports = app => {
             .catch(err => res.status(500).send(err))
     }
 
-    return {save, get, getById}
+    const localGetTransactions = (accountId) => {
+        return app.db('transactions')
+            .where('accountId', accountId)
+    }
+
+    return {save, get, getById, localGetTransactions}
 }

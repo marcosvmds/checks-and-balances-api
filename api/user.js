@@ -1,7 +1,12 @@
+const bcrypt = require('bcrypt-nodejs')
+
 module.exports = app => {
 
     const save = (req, res) => {
-        const user = {...req.body}
+        const user = {
+            ...req.body, 
+            password: encryptPassword(user.password)
+        }
         app.db('users')
             .insert(user)
             .then(_ => res.status(204).send("usuário cadastrado"))

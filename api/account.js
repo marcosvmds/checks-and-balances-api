@@ -8,8 +8,6 @@ module.exports = app => {
             .catch(err => res.status(500).send(err))
     }
     const patch = (req, res) =>{
- 
-
         app.db('accounts')
             .where('id', req.params.id)
             .update({balance: req.body.balance})
