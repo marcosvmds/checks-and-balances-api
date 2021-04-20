@@ -1,3 +1,5 @@
+const dotenv = require('dotenv')
+dotenv.config()
 const app = require('express')()
 const consign = require('consign')
 const db = require('./config/db')
@@ -12,6 +14,6 @@ consign().
     then('./config/routes.js').
     into(app)
 
-app.listen(3001, () =>{
+app.listen(process.env.PORT || 3001, () =>{
     console.log("Backend rodando na porta 3001...")
 })

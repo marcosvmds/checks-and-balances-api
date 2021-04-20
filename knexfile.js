@@ -1,5 +1,16 @@
-// Update with your config settings.
 module.exports = {
+  production: {
+    client: 'postgresql',
+    connection: process.env.DATABASE_URL,
+    pool: {
+      min: 2,
+      max: 10
+    },
+    migrations: {
+      tableName: 'knex_migrations'
+    }
+  },
+  development: {
     client: 'postgresql',
     connection: {
       database: 'checks_and_balances',
@@ -13,4 +24,5 @@ module.exports = {
     migrations: {
       tableName: 'knex_migrations'
     }
+  }
 };

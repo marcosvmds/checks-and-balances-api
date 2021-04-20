@@ -1,6 +1,7 @@
-const {authSecret} = require('../.env') 
 const jwt = require('jwt-simple')
 const bcrypt = require('bcrypt-nodejs')
+
+const authSecret = "osrblhh"
 
 module.exports = app =>{
 
@@ -35,9 +36,6 @@ module.exports = app =>{
                 .first()
             existsOrError(account, "User doesn't have account yet")
 
-            // const transactions = await app.db('transactions')
-            //     .where('accountId', account.id)
-
             const transactions = await app.api.transaction.localGetTransactions(account.id)
 
             const secondsNow = Math.floor(Date.now()/1000)
@@ -46,7 +44,7 @@ module.exports = app =>{
                 ...account,
                 sub: user.email,
                 iat: secondsNow,
-                exp: secondsNow + 15
+                exp: secondsNow + 60 * 5
             }
 
             const token = jwt.encode(payload, authSecret)
@@ -56,6 +54,7 @@ module.exports = app =>{
                 token,
                 transactions
             })
+            
         } 
         catch(msg){
             res.status(400).send(msg)
