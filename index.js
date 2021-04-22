@@ -15,5 +15,5 @@ consign().
     into(app)
 
 app.listen(process.env.PORT || 3001, () =>{
-    console.log("Backend rodando na porta 3001...")
+    console.log(`Backend rodando na porta ${process.env.PORT}...`)
 })
