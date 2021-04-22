@@ -16,4 +16,5 @@ consign().
 
 app.listen(process.env.PORT || 3001, () =>{
     console.log(`Backend rodando na porta ${process.env.PORT}...`)
+    console.log(`URL do banco ${process.env.DATABASE_URL}`)
 })
