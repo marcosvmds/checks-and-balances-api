@@ -12,14 +12,15 @@ module.exports = app => {
             .then(_ => res.status(204).send("usuário cadastrado"))
             .catch(err => res.status(500).send(err))
     }
-    const get = (req, res) =>{
-        console.log(`antes da requesição ao banco`)
+    const get = async (req, res) =>{
+        console.log(`antes da requisição ao banco`)
+        console.log(app.db.client.database())
 
-        app.db('users')
+        await app.db('users')
             .then(users => res.json(users))
             .catch(err => res.status(500).send(err))
-
-        console.log("Depois da req????????")
+        
+            console.log("passou")        
     }  
 
     return {save, get}
