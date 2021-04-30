@@ -19,8 +19,7 @@ module.exports = app => {
         await app.db('users')
             .then(users => res.json(users))
             .catch(err => res.status(500).send(err))
-        
-            console.log("passou")        
+     
     }  
 
     return {save, get}
